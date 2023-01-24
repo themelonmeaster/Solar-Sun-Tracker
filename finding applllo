@@ -1,21 +1,97 @@
 #include <Servo.h>
 
-Servo myservo;
+Servo horizServo;
+Servo vertServo;
+int horizMotorPort = 9;
+int vertMotorPort = 8;
+int val1 = 0;
+int val2 = 0;
+
+
+int bottomleft;
+int bottomright;
+int topleft;
+int topright;
 
 void setup() {
   Serial.begin(9600);
-  myservo.attach(9);
+  horizServo.attach(horizMotorPort);
+  vertServo.attach(vertMotorPort);
+  //horizServo.write(val1);
+  //vertServo.write(val2);
+
 }
 
 void loop(){
-  int val;
-
-  while (Serial.available() > 0){
-    val = Serial.parseInt();
-    if( val != 0){
-      Serial.println(val);
-      myservo.write(val);
-    }
-    delay(5);
+  bottomleft = analogRead(A0);
+  bottomright = analogRead(A1);
+  topleft = analogRead(A2);
+  topright = analogRead(A3);
+  Serial.println(bottomleft);
+  Serial.println("====================================================");
+  delay(1000);
+  
+  /*
+  // Left/right movement
+  
+  if (topleft > topright) {
+    val1 += 1;
+    horizServo.write(val1);
+    delay(1);
   }
+  
+  if (bottomleft > bottomright) {
+    val1 += 1;
+    horizServo.write(val1);
+    delay(1);
+  }
+  
+  if (topleft < topright) {
+    val1 -= 1;
+    horizServo.write(val1);
+    delay(1);
+  }
+  if (bottomleft < bottomright) {
+    val1 -= 1;
+    horizServo.write(val1);
+    delay(1);
+  }
+  if (val1 < 0) {
+    val1 = 0;
+  }
+  if (val1 > 180) {
+    val1 = 180;
+  }
+    
+    // Up/down movement
+  
+ if (topleft > bottomleft) {
+    val2 += 1;
+    vertServo.write(val2);
+    delay(1);
+  }
+  if (topright > bottomright) {
+    val2 += 1;
+    vertServo.write(val2);
+    delay(1);
+  }
+  if (topleft < bottomleft) {
+    val2 -= 1;
+    vertServo.write(val2);
+    delay(1);
+  }
+  if (topright < bottomright) {
+    val2 -= 1;
+    vertServo.write(val2);
+    delay(1);
+  }
+  if (val2 > 120) {
+    val2 = 120;
+  }
+  if (val2 < 0) {
+    val2 = 0;
+  }
+  */
 }
+
+
